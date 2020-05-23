@@ -13,8 +13,8 @@ import "./Widget.less";
 function WidgetDropdownButton({ extraOptions, showDeleteOption, onDelete }) {
   const WidgetMenu = (
     <Menu data-test="WidgetDropdownButtonMenu">
-      {extraOptions}
-      {showDeleteOption && extraOptions && <Menu.Divider />}
+      {/*{extraOptions}
+      {showDeleteOption && extraOptions && <Menu.Divider />}*/}
       {showDeleteOption && <Menu.Item onClick={onDelete}>Remove from Dashboard</Menu.Item>}
     </Menu>
   );

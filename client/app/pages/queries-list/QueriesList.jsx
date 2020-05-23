@@ -77,8 +77,8 @@ class QueriesList extends React.Component {
         width: null,
       }
     ),
-    Columns.avatar({ field: "user", className: "p-l-0 p-r-0" }, name => `Created by ${name}`),
-    Columns.dateTime.sortable({ title: "Created At", field: "created_at" }),
+    //Columns.avatar({ field: "user", className: "p-l-0 p-r-0" }, name => `Created by ${name}`),
+    //Columns.dateTime.sortable({ title: "Created At", field: "created_at" }),
     Columns.duration.sortable({ title: "Runtime", field: "runtime" }),
     Columns.dateTime.sortable({ title: "Last Executed At", field: "retrieved_at", orderByField: "executed_at" }),
     Columns.custom.sortable((text, item) => <SchedulePhrase schedule={item.schedule} isNew={item.isNew()} />, {
