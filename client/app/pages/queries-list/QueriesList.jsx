@@ -17,6 +17,7 @@ import ItemsTable, { Columns } from "@/components/items-list/components/ItemsTab
 import Layout from "@/components/layouts/ContentWithSidebar";
 
 import { Query } from "@/services/query";
+import DataSource from "@/services/data-source";
 import { currentUser } from "@/services/auth";
 
 import QueriesListEmptyState from "./QueriesListEmptyState";
@@ -87,8 +88,36 @@ class QueriesList extends React.Component {
     }),
   ];
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource : []
+    }
+  }
+
+  componentDidMount() {
+    DataSource.query().then(data => {
+      this.setState({
+        dataSource: data
+      })
+    })
+  }
+
   render() {
     const { controller } = this.props;
+    const { dataSource } = this.state;
+    const isAllViewOnly = dataSource.every(source => source.view_only);
+    if (isAllViewOnly) {
+      controller.pageItems = []
+    } else {
+      controller.pageItems = controller.pageItems.filter(item => {
+        const sourceWithItem = dataSource.find(source => source.id === item.data_source_id);
+        if (sourceWithItem && sourceWithItem.view_only) {
+          return false;
+        }
+        return true;
+      })
+    }
     return (
       <div className="page-queries-list">
         <div className="container">

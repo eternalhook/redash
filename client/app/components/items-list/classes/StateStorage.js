@@ -36,9 +36,14 @@ export class UrlStateStorage extends StateStorage {
 
     const { field: orderByField, reverse: orderByReverse } = parseOrderBy(params.order || defaultOrderBy);
 
+    let itemsPerPage = parseInt(params.page_size, 10) || defaultState.itemsPerPage;
+    if (location.path === '/queries') {
+      itemsPerPage = 100;
+    }
+
     return {
       page: parseInt(params.page, 10) || defaultState.page,
-      itemsPerPage: parseInt(params.page_size, 10) || defaultState.itemsPerPage,
+      itemsPerPage,
       orderByField,
       orderByReverse,
       searchTerm,
